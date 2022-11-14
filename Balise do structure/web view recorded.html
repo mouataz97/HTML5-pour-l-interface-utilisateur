@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<img src="map.png" usemap="#map1">
+<map name="map1">
+    <area shape="rect" coords="0,0,40,40" href="https://www.youtube.com/" alt="P.1">
+    <area shape="circle" coords="150,150,20" href="structure fonctionnees.html" alt="postion">
+</map>
+
+<figure>
+    <image src="car-18.png" width="100">
+    <figcaption>Une photo d'une voiture</figcaption>
+</figure>
+
+<audio controls>
+    <source src="andrew.webm" type="audio/webm">
+    Votre navigateur ne supporte pas la balise audio
+</audio>
+
+<video width="320" height=”240” controls>
+    <source src="couloir.mp4" type="video/mpeg">
+    Votre navigateur ne supporte pas la balise video
+</video>
+
+<script>
+    var vidl=document.getElementById("maVideo");
+</script>
+<input type=”button” onClick="vidl.play()" value="Play”/>
+
+</body>
+</html>
