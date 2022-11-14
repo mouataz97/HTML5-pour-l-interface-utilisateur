@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!--  canvas  -->
+<canvas id="dessin" width="640" height="480">
+    Texte pour les navigateurs qui ne supportent pas canvas
+</canvas>
+<script>
+    var monCanvas = document.getElementById('dessin');
+    if (monCanvas.getContext){
+       var ctx = monCanvas.getContext('2d');
+       // rotation
+       ctx.rotate(Math.PI / 8);
+       ctx.fillStyle = "red";
+       ctx.fillRect(0,0,200,50);
+       ctx.fillStyle = "blue";
+       ctx.fillStyle = "red";
+       ctx.fillRect(30,30,200,50);
+   } else {
+       alert('canvas non supporté par ce navigateur');
+   }
+</script>
+
+<!--Deux rectangles avec rotation du contexte-->
+<canvas id="dessin2" width="640" height="480">
+    Texte pour les navigateurs qui ne supportent pas canvas
+</canvas>
+<script>
+    var monCanvas2 = document.getElementById('dessin2');
+    if (monCanvas2.getContext){
+        var ctx2 = monCanvas2.getContext('2d');
+        /* premier rectangle dans le contexte par défaut */
+        ctx2.fillStyle = "red";
+        ctx2.fillRect(0, 0, 200, 50);
+        /* rotation du contexte */
+          ctx2.rotate(Math.PI / 8);
+        /* second rectangle dans le contexte modifié */
+        ctx2.fillStyle = "blue";
+        ctx2.fillRect(30, 30, 200, 50);
+    } else {
+        alert('canvas non supporté par ce navigateur');
+    }
+</script>
+
+<canvas id="dessin3" width="640" height="480">
+    Texte pour les navigateurs qui ne supportent pas canvas
+</canvas>
+<script>
+    var monCanvas = document.getElementById('dessin3');
+    if (monCanvas.getContext){
+        var ctx = monCanvas.getContext('2d');
+        ctx.fillStyle    = '#00F';
+        ctx.font         = 'Italic 30px Sans-Serif';
+        ctx.textBaseline = 'top';
+        /* texte plein */
+        ctx.fillText  ('Hello!', 40, 50);
+        ctx.font         = 'Bold 30px Sans-Serif';
+        /* contour de texte */
+        ctx.strokeText('Hello!', 40, 150);
+    } else {
+        alert('canvas non supporté par ce navigateur');
+    }
+</script>
+
+<canvas id="dessin4" width="640" height="480">
+    Texte pour les navigateurs qui ne supportent pas canvas
+</canvas>
+<script>
+    monCanvas = document.getElementById('dessin4');    
+    if (monCanvas.getContext){
+        ctx = monCanvas.getContext('2d');
+        /* nouvelle image */
+        sun = new Image();
+        /* définition de la source */
+        sun.src = 'car-18.png';
+        /* tracé uniquement quand l'image sera chargée
+        (quand l'événement onLoad sera déclenché, exécuter ctx.drawImage() */
+        sun.onload = function(){
+            ctx.drawImage(sun, 0, 0);
+        }
+    } else {
+        alert('canvas non supporté par ce navigateur');
+    }
+</script>
+</body>
+</html>
