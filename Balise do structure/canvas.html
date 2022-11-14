@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!--  canvas  -->
+<canvas id="dessin" width="640" height="480">
+    Texte pour les navigateurs qui ne supportent pas canvas
+</canvas>
+
+<!--
+<script>
+    var monCanvas = document.getElementById('dessin');
+    if (monCanvas.getContext){
+         var ctx = monCanvas.getContext('2d');
+         ctx.fillStyle = "red";
+         ctx.fillRect(0,0,200,50);
+         ctx.fillStyle = "blue";
+         ctx.fillRect(30,30,200,50);
+   } else {
+         alert('canvas non supporté par ce navigateur');
+   }
+</script>
+-->
+
+<!-- Triangle segment par segment -->
+<!--
+<script>
+    var monCanvas = document.getElementById('dessin');
+    var ctx = monCanvas.getContext('2d');
+    /* couleurs de remplissage et de trait */
+    ctx.fillStyle = "yellowgreen";
+    ctx.strokeStyle = "steelblue";
+    ctx.lineWidth = 2;
+    /* début de tracé */
+    ctx.beginPath();
+    ctx.moveTo(20,20);
+    ctx.lineTo(20,100);
+    ctx.lineTo(70, 100);
+    ctx.lineTo(20,20);
+    ctx.closePath();
+    /* remplissage */
+    ctx.fill();
+   /* couleur de trait */
+   ctx.stroke();
+</script>
+-->
+<script>
+    var monCanvas = document.getElementById('dessin');
+    if (monCanvas.getContext){
+         var ctx = monCanvas.getContext('2d');
+         /* Dégradé linéaire et points*/         
+         var lingrad = ctx.createLinearGradient(0,0,0,230);
+         lingrad.addColorStop(0, '#00ABEB');
+         lingrad.addColorStop(0.5, '#66CC00');
+         lingrad.addColorStop(1, '#000000');
+         /* Association du dégradé au style du contexte */     
+         ctx.fillStyle = lingrad;
+         /* Le rectangle qui va contenir le dégradé */
+         ctx.fillRect(30,30,200,50);
+   } else {
+          alert('canvas non supporté par ce navigateur');
+   }
+</script>
+</body>
+</html>
