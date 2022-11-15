@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="dessin" width="640" height="480">
+        Texte pour les navigateurs qui ne supportent pas canvas
+    </canvas>
+
+    <script>
+        /* canvas */
+        var monCanvas = document.getElementById('dessin');
+        let (i = 0)
+        if (monCanvas.getContext){
+            var ctx = monCanvas.getContext('2d');
+            /* dessin */
+            ctx.fillStyle = "blue";
+            /* translation au centre */
+            ctx.translate(monCanvas.width/2,monCanvas.height/2)
+            /* incrément */
+            var i = 0;
+            /* timer */
+            var inter = setInterval(Rotation, 100);    
+        } else {
+            alert('canvas non supporté par ce navigateur');
+        }
+            
+        /* fonction de dessin */
+        function Rotation() {
+            ctx.rotate(0.5);
+            /* dessin */
+            ctx.fillRect(0, 0, 200, 20);
+            i++;
+            if(i>11) clearInterval(inter);
+        }    
+    </script>
+</body>
+</html>
