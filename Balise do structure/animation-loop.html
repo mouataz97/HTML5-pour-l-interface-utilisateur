@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=
+    , initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="dessin" width="640" height="480">
+        se message a afficher pour les navigateur qui ne supporte pas canvas
+    </canvas>
+    
+    <script>
+
+    /* canvas */
+    var monCanvas = document.getElementById('dessin');
+    if (monCanvas.getContext){
+        var ctx = monCanvas.getContext('2d');
+        /* incrément */
+        var i=0;
+    } else {
+        alert('canvas non supporté par ce navigateur');
+    }
+        
+    /* fonction de dessin */
+    function Animer() {
+        /* incrémentation */
+        i++;        
+        /* sauvegarde de l'état du contexte */
+        ctx.save();        
+        /* effaçage */
+        ctx.clearRect(0, 0, monCanvas.width,monCanvas.height);
+        /* translation du contexte et dessin du premier rectangle */
+        ctx.translate(i,i);
+        ctx.fillStyle = "blue";
+        ctx.fillRect(-10, -10, 20, 20);
+        /* rotation puis translation du contexte et dessin du cercle */
+          ctx.rotate( i/10 );
+        ctx.translate(50,0);
+          ctx.beginPath();
+        /* arc : x, y, radius, startAngle, endAngle, antiClockwise */
+          ctx.arc(0, 0, 10, 0, 2 * Math.PI, false);
+          ctx.fillStyle = 'green';
+          ctx.fill();
+          ctx.lineWidth = 1;
+          ctx.strokeStyle = '#003300';
+          ctx.stroke();
+          /* retour à l'état précédent du contexte */
+        ctx.restore();
+    }
+    
+    /* fonction d'arrêt */
+    function Stopper() {
+        clearInterval(inter);
+    }
+
+    /* timer */
+    var inter = setInterval(Animer, 100);    
+    setTimeout(Stopper, 20000);
+
+</script>
+</body>
+</html>
