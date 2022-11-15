@@ -8,17 +8,19 @@
 </head>
 <body>
     <canvas id="dessin" width="640" height="480">
-        text pour le navigateur qui se ne supportons pas canvas
+        Texte pour les navigateurs qui ne supportent pas canvas
     </canvas>
 
     <script>
+        /* canvas */
         var monCanvas = document.getElementById('dessin');
-        if(monCanvas.getContext){
+        if (monCanvas.getContext){
             var ctx = monCanvas.getContext('2d');
-        }else{
+        } else {
             alert('canvas non supporté par ce navigateur');
         }
-
+            
+        /* fonction de dessin */
         function Animer() {
             /* effaçage */
             ctx.clearRect(0, 0, monCanvas.width,monCanvas.height);
@@ -27,7 +29,7 @@
             ctx.fillStyle = "blue";
             ctx.fillRect(-10, -10, 20, 20);
             /* rotation puis translation du contexte et dessin du cercle */
-            ctx.rotate( 0.5 );
+              ctx.rotate( 0.5 );
             ctx.translate(50,0);
             /* arc : x, y, radius, startAngle, endAngle, antiClockwise */
               ctx.beginPath();
@@ -38,11 +40,13 @@
               ctx.strokeStyle = '#003300';
               ctx.stroke();
         }
-
+        
+        /* fonction d'arrêt */
         function Stopper() {
             clearInterval(inter);
         }
-
+    
+        /* timer */
         var inter = setInterval(Animer, 100);    
         setTimeout(Stopper, 20000);
     </script>
