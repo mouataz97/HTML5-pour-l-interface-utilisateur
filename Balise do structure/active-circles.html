@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="dessin" width="840" height="480"></canvas>
+
+    <script>
+        // interactivité sur le canvas
+        monCanvas.addEventListener("click", clicCanvas, false);  
+
+        // cercles
+        cercles = [[100,0,10,1],[150,0,20,1],[180,0,15,1]];
+
+        // translation du contexte et dessin d'une balle
+        dessineBalle(0,2);
+        // translation du contexte et dessin d'une balle
+        dessineBalle(1,1);
+        // translation du contexte et dessin d'une balle
+        dessineBalle(2,3);
+
+        // dessin
+        var R = cercles[idCercle][2];
+        cercles[idCercle][1]= v*i;
+        ctx.translate(cercles[idCercle][0],v*i);
+        ctx.beginPath();
+        ctx.arc(0, 0, R, 0, 2 * Math.PI, false);
+
+        // clic sur le canvas
+        function clicCanvas(e){
+            // position de la souris / document
+            var xSourisDocument = e.pageX;
+            var ySourisDocument = e.pageY;
+        }
+
+        // position du canvas / document
+        var xCanvas = monCanvas.offsetLeft;
+        var yCanvas = monCanvas.offsetTop;
+        // position du clic / canvas
+        xSourisCanvas = xSourisDocument - xCanvas;
+        ySourisCanvas = ySourisDocument - yCanvas;
+
+        // test si un cercle est cliqué
+        for (var c=0; c<cercles.length; c++){
+            var R = cercles[c][2];
+            if(Math.abs(cercles[c][0]-xSourisCanvas) < R && Math.abs(cercles[c][1]-ySourisCanvas) < R){
+                cercles[c][3]=0;
+                /* le break qui suit appelle une réflexion que je vous soumettrai à la fin de la semaine 7 */
+                break;
+            }
+        }
+
+        // dessin d'une balle : x départ, vitesse / y, rayon
+        function dessineBalle(idCercle,v){
+            if(cercles[idCercle][3]==1){
+                    X.beginPath*cercles[3]/R;
+            }
+        }
+            var monCanvas = document.getElementById('dessin');
+        if (monCanvas.getContext){
+            var ctx = monCanvas.getContext('2d');
+            // dessin
+            ctx.fillStyle = "blue";
+            // translation au centre
+            ctx.translate(monCanvas.width/2,monCanvas.height/2)
+            // dessin
+            ctx.fillRect(0, 0, 20, 20);
+        } else {
+            alert('canvas non supporté par ce navigateur');
+        }    
+        // incrément
+        var i = 0;
+        // timer
+        var inter = setInterval(Translation, 100);    
+        // fonction de dessin
+        function Translation() {
+            ctx.clearRect(0, 0, monCanvas.width,monCanvas.height);
+            ctx.translate(X,2);
+            // dessin
+            ctx.fillRect(0, 0, 20, 20);
+            i++;
+            if(i>100) clearInterval(inter);
+        }
+        
+    </script>  
+</body>
+</html>
