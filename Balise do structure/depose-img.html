@@ -1,55 +1,47 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+<meta charset="UTF-8">
+<title>Le drag and drop avec HTML5 et jQuery</title>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript">
+/* ajouter propriété pour drop et transfert de données */
+$.event.props.push('dataTransfer');
+$(document).ready(function() {
+    $('#image1').on({
+         dragstart: function(e) {
+            var id = $(this).attr('id');
+            $('#info').html("déplacement de "+id);
+            $(this).css('opacity', '0.5');
+            /* on garde l'identifiant en mémoire */
+            e.dataTransfer.setData('text/html', id);
+        },
+        dragend: function() {
+            var id = $(this).attr('id');
+            $('#info').html("fin du déplacement de "+id);
+            $(this).css('opacity', '1');
+        }
+    });
+    $('#cible').on({
+        dragover: function(e) {
+            e.preventDefault();
+        },
+        drop: function(e) {
+            e.preventDefault();
+            var data = e.dataTransfer.getData('text/html');
+            $(this).append($("#"+data));
+        }
+    });    
+});
+</script>
 </head>
 <body>
-    <p>Détection du déplacement et de sa fin. (Déplacer l'image)</p>
-<p id="info"></p>
-<img id="image1" src="HTML5-logo.png" draggable="true" width="100" height="100">
-<div id="cible">Ce conteneur acceptera l'élément déplacé.</div>
-<style type="text/css">
-    #cible {width:200px;height:200px;border:1px solid #aaaaaa;}
-</style>
-
-<script>
-    var image =    document.getElementById('image1')
-    image.addEventListener('dragstart',fonction_dragstart,false);
-    image.addEventListener('dragend',fonction_dragend,false);    
-    function fonction_dragend(ev){
-        ev.preventDefault();
-        var id = ev.target.id;
-        document.getElementById('info').innerHTML="fin de déplacement de "+id;
-        /* remettre les valeurs initiales de transparence, supprimer le cadre */
-        this.style.opacity=1;
-        this.style.borderStyle='none';
-    }
-    
-    function fonction_dragstart(ev){
-        var id = ev.target.id;
-        document.getElementById('info').innerHTML="déplacement de "+id;
-        /* changer transparence de l'élément, ajouter un cadre */
-        this.style.opacity=0.2;
-        this.style.borderStyle='dashed';
-        ev.dataTransfer.setData("Text",ev.target.id);
-    }    
-
-    var cible =    document.getElementById('cible')
-    cible.addEventListener('dragover',fonction_dragover,false);
-    cible.addEventListener('drop',fonction_drop,false);
-    function fonction_dragover(ev){
-        /* empêcher le fonctionnement par défaut */
-        ev.preventDefault();
-    }    
-    function fonction_drop(ev){
-        ev.preventDefault();
-        /* récupération de l'identifiant de l'élément déplacé */
-        var data=ev.dataTransfer.getData("Text");
-        ev.target.appendChild(document.getElementById(data));
-    }            
-</script>
+    <p>Détection du déplacement et de sa fin avec jQuery. (Déplacer l'image)</p>
+    <p id="info"></p>
+    <div id="image1"><img src="HTML5-logo.png" draggable="true" width="100" height="100"></div>
+    <div id="cible">Ce conteneur acceptera l'élément déplacé.</div>
+    <style type="text/css">
+        #cible {width:200px;height:200px;border:1px solid #aaaaaa;}
+    </style>   
 </body>
 </html>
