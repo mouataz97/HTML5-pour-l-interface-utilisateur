@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="dessin" width="720" height="480">
+
+    </canvas>
+    <script>
+        // gestionnaire
+        var X = 0;
+        document.addEventListener("keydown", down, false);
+        document.addEventListener("keyup", up, false);
+        
+        function down(e){
+            // traitement de différents cas
+            switch(e.keyCode) {        
+            case 39:
+                // flèche droite
+                X = 4;
+                  break;
+            case 37:
+                  // flèche gauche
+                X = -4;
+                  break;
+                default:
+            }
+        }
+        function up(e){
+            X = 0;
+        }
+        
+        // canvas
+        var monCanvas = document.getElementById('dessin');
+        if (monCanvas.getContext){
+            var ctx = monCanvas.getContext('2d');
+            // dessin
+            ctx.fillStyle = "blue";
+            // translation au centre
+            ctx.translate(monCanvas.width/2,monCanvas.height/2)
+            // dessin
+            ctx.fillRect(0, 0, 20, 20);
+        } else {
+            alert('canvas non supporté par ce navigateur');
+        }    
+        // incrément
+        var i = 0;
+        // timer
+        var inter = setInterval(Translation, 100);    
+        // fonction de dessin
+        function Translation() {
+            ctx.clearRect(0, 0, monCanvas.width,monCanvas.height);
+            ctx.translate(X,2);
+            // dessin
+            ctx.fillRect(0, 0, 20, 20);
+            i++;
+            if(i>100) clearInterval(inter);
+        }
+    </script>
+</body>
+</html>
